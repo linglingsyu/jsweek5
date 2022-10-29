@@ -95,47 +95,29 @@ const state = {
       this.data.push(data)
     }
   },
-  async addHandler() {
-    const name = document.querySelector('#name').value
-    const imgUrl = document.querySelector('#imgUrl').value
-    const area = document.querySelector('#area').value
-    const price = document.querySelector('#price').value
-    const group = document.querySelector('#group').value
-    const rate = document.querySelector('#rate').value
-    const desc = document.querySelector('#description').value
-    const data = {
-      name: name.trim(),
-      imgUrl: imgUrl.trim(),
-      area: area,
-      description: desc.trim(),
-      group: group.trim(),
-      price: price.trim(),
-      rate: rate.trim(),
-    }
-    if (state.checkData(data)) {
-      await state.addData(data)
-      state.setData()
-      state.clearHandler()
-    }
-  },
-  checkData(data) {
+  addFormData() {
+    const form = document.querySelector('#form')
+    const formData = new FormData(form)
+    // console.log(formData)
+    const data = {}
     let status = true
-    for (let [key, value] of Object.entries(data)) {
+    for (const [key, value] of formData) {
       let dom = document.querySelector('#' + key)
       dom.classList.remove('border-b-red-400')
       dom.classList.add('border-b-main')
-      if (
-        value.length === 0 ||
-        (key === 'area' && value === '0') ||
-        (key === 'rate' && (value < 0 || value > 10))
-      ) {
-        dom.value = key === 'area' ? '0' : dom.value
+      if (value || (key === 'rate' && value > 0 && value < 10)) {
+        data[key] = value
+      } else {
         dom.classList.remove('border-b-main')
         dom.classList.add('border-b-red-400')
         status = false
       }
     }
-    return status
+    if (status && Object.keys(data).length === 7) {
+      state.addData(data)
+      state.setData()
+      form.reset()
+    }
   },
   filterData(condition) {
     console.log(this)
@@ -144,23 +126,16 @@ const state = {
       this.setData(result)
     }
   },
-  clearHandler() {
-    document.querySelector('#name').value = ''
-    document.querySelector('#imgUrl').value = ''
-    document.querySelector('#area').value = '0'
-    document.querySelector('#price').value = ''
-    document.querySelector('#group').value = ''
-    document.querySelector('#rate').value = ''
-    document.querySelector('#description').value = ''
-    document.querySelector('#filterArea').value = ''
-  },
   checkDescLength(content) {
     return content.length > 100 ? content.substring(0, 100) : content
   },
 }
 
 state.init()
-document.querySelector('#addBtn').addEventListener('click', state.addHandler)
+document.querySelector('#form').addEventListener('submit', function (e) {
+  e.preventDefault()
+  state.addFormData()
+})
 
 document.querySelector('#filterArea').addEventListener('change', function () {
   state.filterData(this.value)
