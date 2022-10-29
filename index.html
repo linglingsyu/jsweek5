@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="max-w-[960px] mx-auto py-[120px] ">
+      <div class="pt-[60px] px-[95px]  pb-[100px] flex justify-between items-center mb-4 rounded-xl shadow-[0_3px_6px_1px_#00000029]">
+      <div>
+        <img
+        class="w-[350px] object-cover"
+        src="/src/img/main_img.png"
+        alt="main_img.png"
+      />
+        <img
+          class="w-[350px] object-cover"
+          src="/src/img/logo.png"
+          alt="logo.png"
+          />
+
+      </div>
+      <div>
+        <h1 class="mb-8 text-main text-2xl leading-[33px] border-b-[3px] border-main font-bold flex items-center"><span class="material-icons mr-[6px] ">
+          add_circle
+          </span> 新增旅遊套票</h1>
+        <ul class="w-[350px]">
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for="name">套票名稱</label>
+            <input type="text" class="bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" placeholder="請填寫套票名稱" id="name"/>
+          </li>
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for="url">圖片網址</label>
+            <input type="text" class="bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" placeholder="請填寫圖片網址" id="imgUrl"/>
+          </li>
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for="area">景點地區</label>
+            <select id="area" class="bg-[#FAFAFA] rounded-tl rounded-tr  w-[255px] text-[#818A91] border-b border-b-main py-2 px-3 focus:outline-none"> 
+              <option hidden selected value="0">請選擇景點地區</option>
+              <option value="台北">台北</option>
+              <option value="台中">台中</option>
+              <option value="高雄">高雄</option>
+            </select>
+          </li>
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for="price">套票金額</label>
+            <input type="number" min="0" class="bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" id="price" placeholder="請填寫套票金額" />
+          </li>
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for="group">套票組數</label>
+            <input type="number" min="1" class="bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" id="group" placeholder="請填寫套票組數" />
+          </li>
+          <li class="flex justify-between items-center mb-4">
+            <label class=" text-main leading-[22px] font-medium" for=class">套票星級</label>
+            <input type="number" min="0" max="10" class="bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" id="rate" placeholder="請填寫套票星級" />
+          </li>
+          <li class="flex justify-between items-center">
+            <label class=" text-main leading-[22px] font-medium self-start" for="desc">套票描述</label>
+            <textarea id="description" class="h-[111px] resize-none bg-[#FAFAFA] rounded-tl rounded-tr text-[#818A91] w-[255px]  border-b border-b-main py-2 px-3 focus:outline-none" placeholder="請填寫套票描述（限100字）"></textarea>
+          </li>
+        </ul>
+        <div class="text-right">
+          <button class="mt-6 py-[10px] px-10 bg-main  text-white rounded ease-linear duration-200 hover:bg-secondary" type="button" id="addBtn">新增套票</button>
+        </div>
+      </div>
+    </div>
+    </section>
+    <section class="bg-[#F7F7F7] pt-[60px] pb-[120px]">
+      <div class="max-w-[1110px] w-full mx-auto ">
+      <div class="mb-12 max-w-[960px] mx-auto ">
+        <select class="w-[255px] rounded border border-[#CED4DA] text-[#818A91] py-2 px-3 mr-[30px] focus:outline-none" type="text" id="filterArea">
+          <option selected hidden value="地區搜尋">地區搜尋</option>
+          <option value="台北">台北</option>
+          <option value="台中">台中</option>
+          <option value="高雄">高雄</option>
+        </select>
+        <span id="filterCount" class=" text-[#818A91] leading-[22px]"></span>
+      </div>
+      <ul id="contentBox" class="flex flex-wrap -mx-[15px] gap-y-10"></ul>
+    </div>
+    </section>
+  </body>
+  <script src="./src/app.js"></script>
+</html>
