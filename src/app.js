@@ -36,6 +36,7 @@ const state = {
       rate: 7,
     },
   ],
+  flag: false,
   init() {
     this.setData()
   },
@@ -103,13 +104,13 @@ const state = {
     const rate = document.querySelector('#rate').value
     const desc = document.querySelector('#description').value
     const data = {
-      name: name,
-      imgUrl: imgUrl,
+      name: name.trim(),
+      imgUrl: imgUrl.trim(),
       area: area,
-      description: desc,
-      group: group,
-      price: price,
-      rate: rate,
+      description: desc.trim(),
+      group: group.trim(),
+      price: price.trim(),
+      rate: rate.trim(),
     }
     if (state.checkData(data)) {
       await state.addData(data)
@@ -128,7 +129,7 @@ const state = {
         (key === 'area' && value === '0') ||
         (key === 'rate' && (value < 0 || value > 10))
       ) {
-        dom.value = ''
+        dom.value = key === 'area' ? '0' : dom.value
         dom.classList.remove('border-b-main')
         dom.classList.add('border-b-red-400')
         status = false
@@ -153,6 +154,9 @@ const state = {
     document.querySelector('#description').value = ''
     document.querySelector('#filterArea').value = ''
   },
+  checkDescLength(content) {
+    return content.length > 100 ? content.substring(0, 100) : content
+  },
 }
 
 state.init()
@@ -160,4 +164,20 @@ document.querySelector('#addBtn').addEventListener('click', state.addHandler)
 
 document.querySelector('#filterArea').addEventListener('change', function () {
   state.filterData(this.value)
+})
+
+const descDOM = document.querySelector('#description')
+descDOM.addEventListener('compositionstart', function () {
+  state.flag = false
+})
+descDOM.addEventListener('compositionend', function () {
+  state.flag = true
+})
+descDOM.addEventListener('keyup', function () {
+  if (state.flag) {
+    descDOM.value = state.checkDescLength(this.value)
+  }
+})
+descDOM.addEventListener('input', function () {
+  descDOM.value = state.checkDescLength(this.value)
 })
