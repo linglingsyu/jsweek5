@@ -98,15 +98,15 @@ const state = {
   addFormData() {
     const form = document.querySelector('#form')
     const formData = new FormData(form)
-    // console.log(formData)
     const data = {}
     let status = true
     for (const [key, value] of formData) {
       let dom = document.querySelector('#' + key)
       dom.classList.remove('border-b-red-400')
       dom.classList.add('border-b-main')
-      if (value || (key === 'rate' && value > 0 && value < 10)) {
-        data[key] = value
+      let val = value.trim()
+      if (val.length > 0 || (key === 'rate' && val > 0 && val < 10)) {
+        data[key] = val
       } else {
         dom.classList.remove('border-b-main')
         dom.classList.add('border-b-red-400')
