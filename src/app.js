@@ -120,8 +120,9 @@ const state = {
     }
   },
   filterData(condition) {
-    console.log(this)
-    if (condition !== undefined) {
+    if (condition === 'all') {
+      this.setData()
+    } else if (condition !== undefined) {
       const result = this.data.filter((item) => item.area === condition)
       this.setData(result)
     }
