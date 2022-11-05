@@ -713,6 +713,10 @@ html {
   clear: none;
 }
 
+.m-1 {
+  margin: 0.25rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -863,6 +867,10 @@ html {
   height: 180px;
 }
 
+.h-1 {
+  height: 0.25rem;
+}
+
 .min-h-\[43px\] {
   min-height: 43px;
 }
@@ -877,6 +885,10 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-1 {
+  width: 0.25rem;
 }
 
 .max-w-\[960px\] {
@@ -1831,6 +1843,11 @@ html {
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -1943,6 +1960,14 @@ html {
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .py-\[120px\] {
@@ -2527,6 +2552,10 @@ html {
   content: var(--tw-content);
 }
 
+.\[a-zA-Z-\:\#\] {
+  a-z-a--z-: #;
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -2607,6 +2636,12 @@ html {
 
   .sm\:underline {
     text-decoration-line: underline;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:mt-4 {
+    margin-top: 1rem;
   }
 }
 
