@@ -1,6 +1,7 @@
 const state = {
   flag: false,
   data: [],
+  chart: null,
   async init() {
     await this.getData()
     this.setData()
@@ -11,7 +12,6 @@ const state = {
         'https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json'
       )
       this.data = response.data.data
-      // console.log(this.data)
     } catch (error) {
       console.error(error)
     }
@@ -28,12 +28,19 @@ const state = {
       })
       filterCount.innerHTML = `本次共搜尋${filterResult.length}筆資料`
     } else {
-      console.log(this.data)
       this.data.forEach((item) => {
         const content = this.getDataTemplate(item)
         contentBox.insertAdjacentHTML('beforeend', content)
       })
       filterCount.innerHTML = `本次共搜尋${this.data.length}筆資料`
+    }
+    const AreaData = this.getAreaData(this.data)
+    if (this.chart !== null) {
+      this.chart.load({
+        columns: AreaData,
+      })
+    } else {
+      this.renderChart(AreaData)
     }
   },
   getDataTemplate(data) {
@@ -107,6 +114,66 @@ const state = {
   },
   checkDescLength(content) {
     return content.length > 100 ? content.substring(0, 100) : content
+  },
+  getAreaData(data) {
+    const countResult = data.reduce((prev, current) => {
+      if (prev.hasOwnProperty(current.area)) {
+        prev[current.area]++
+      } else {
+        prev[current.area] = 1
+      }
+      return prev
+    }, {})
+    let result = []
+    for (const [key, val] of Object.entries(countResult)) {
+      let tmp = []
+      tmp[0] = key
+      tmp[1] = val
+      result.push(tmp)
+    }
+    return result
+  },
+  renderChart(data) {
+    // if(!data) data = getAreaData(this.data)
+    let keys = []
+    for (const item of data) {
+      keys.push(item[0])
+    }
+
+    this.chart = c3.generate({
+      bindto: '#chart',
+      size: {
+        width: 640,
+      },
+      data: {
+        columns: data,
+        type: 'donut',
+        // onclick: function (d, i) {
+        //   console.log('onclick', d, i)
+        // },
+        // onmouseover: function (d, i) {
+        //   console.log('onmouseover', d, i)
+        // },
+        // onmouseout: function (d, i) {
+        //   console.log('onmouseout', d, i)
+        // },
+      },
+      donut: {
+        title: '套票地區比重',
+      },
+    })
+
+    //   setTimeout(function () {
+    //     chart.unload({
+    //       ids: '高雄',
+    //     })
+    //     chart.unload({
+    //       ids: '台中',
+    //     })
+    //     chart.unload({
+    //       ids: '台北',
+    //     })
+    //   }, 1500) //1.5秒
   },
 }
 

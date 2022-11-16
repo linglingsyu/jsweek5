@@ -665,12 +665,16 @@ html {
   left: -0.25rem;
 }
 
-.left-0 {
-  left: 0px;
-}
-
 .top-0 {
   top: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.left-0 {
+  left: 0px;
 }
 
 .isolate {
@@ -749,6 +753,10 @@ html {
 
 .mr-\[30px\] {
   margin-right: 30px;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .mb-\[22px\] {
@@ -889,6 +897,10 @@ html {
 
 .w-1 {
   width: 0.25rem;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .max-w-\[960px\] {
@@ -1838,14 +1850,14 @@ html {
   background-color: rgb(100 195 191 / var(--tw-bg-opacity));
 }
 
-.bg-\[rgb\(255\2c 0\2c 0\)\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[rgb\(255\2c 0\2c 0\)\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
 .decoration-slice {
