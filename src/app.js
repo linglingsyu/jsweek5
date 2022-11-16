@@ -143,8 +143,9 @@ const state = {
     this.chart = c3.generate({
       bindto: '#chart',
       size: {
-        width: 640,
+        width: 320,
       },
+
       data: {
         columns: data,
         type: 'donut',
@@ -159,6 +160,7 @@ const state = {
         // },
       },
       donut: {
+        width: 15,
         title: '套票地區比重',
       },
     })
